@@ -2,29 +2,43 @@
 <body>
 <h1>■{{$title}}</h1>
 
+<form method="post" action={{url('index')}}>
+    @csrf
+    <input type="text" name="name" placeholder="名前を入力">
+    <input type="submit" value="検索">
+</form>
+
 <table>
     <thead>
     <tr>
+
         <th scope="col">ID</th>
         <th scope="col">名前</th>
-        <th scope="col">パスワード</th>
+        <th scope="col">レベル</th>
+        <th scope="col">経験値</th>
     </tr>
     </thead>
-    @foreach($accounts as $account)
+    @foreach($users as $user)
         <thead>
         <tr>
-            <td>{{$account['id']}}</td>
-            <td>{{$account['name']}}</td>
-            <td>{{$account['password']}}</td>
+
+            <td>{{$user->id}}</td>
+            <td>{{$user['name']}}</td>
+            <td>{{$user['level']}}</td>
+            <td>{{$user['EXP']}}</td>
         </tr>
         </thead>
 
     @endforeach
 </table>
 
-<form method="post" action={{url('scores')}}>
+<form method="post" action={{url('items')}}>
     @csrf
-    <input type="submit" value="スコア一覧へ">
+    <input type="submit" value="アイテム一覧へ">
+</form>
+<form method="post" action={{url('userItems')}}>
+    @csrf
+    <input type="submit" value="所持アイテム一覧へ">
 </form>
 <form method="post" action={{url('logout')}}>
     @csrf
