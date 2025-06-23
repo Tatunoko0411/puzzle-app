@@ -20,11 +20,14 @@ class AuthController extends Controller
 
     public function index(Request $request)
     {
+
         return view('auth/index', ['error_id' => $request->error_id]);
     }
 
     public function logout(Request $request)
     {
+        $request->session()->flush();
+
         return view('auth/index', ['error_id' => $request->error_id]);
     }
 
@@ -60,6 +63,7 @@ class AuthController extends Controller
 
 
         if (Hash::check($request->password, $account->password)) {
+            $request->session()->put('login', true);
             return redirect('accounts/index');
         }
 

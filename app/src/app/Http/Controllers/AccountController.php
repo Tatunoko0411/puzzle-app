@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Account;
-use App\Models\user;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Barryvdh\Debugbar\Facades\Debugbar;
+use Illuminate\Support\Facades\DB;
 
 class AccountController extends Controller
 {
@@ -41,7 +42,7 @@ class AccountController extends Controller
     public function index(Request $request)
     {
         //テーブルのすべてのレコードを取得
-        $users = User::All();
+        $users = User::simplePaginate(10);
         $accounts = Account::All();
         $title = 'アカウント一覧';
         $count = Account::count();//レコード数
@@ -52,10 +53,25 @@ class AccountController extends Controller
             ->get());
 
         if (!empty($request->name)) {
-            $users = User::where('name', '=', "{$request->name}")->get();
+            $users = User::where('name', '=', "{$request->name}")->simplePaginate(10);
         }
 
         return view('accounts/index', ['title' => $title, 'users' => $users]);
+    }
+
+    public function userDate(Request $request)
+    {
+        $user = User::where('id', '=', $request->id)->get();
+        //dd($user);
+
+        $userItems = DB::table('user_items')
+            ->join('users', 'users.id', '=', 'user_items.user_id')
+            ->join('items', 'items.id', '=', 'user_items.item_id')
+            ->select('user_items.id as id', 'user_items.id as item_id', 'items.name as name', 'amount')
+            ->where('user_items.user_id', '=', "{$request->id}")
+            ->get();
+
+        return view('accounts/user_date', ['user' => $user, 'items' => $userItems]);
     }
 
 }

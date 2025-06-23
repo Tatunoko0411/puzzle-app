@@ -30,7 +30,7 @@
     @endforeach
 </table>
 
-<form method="post" action={{url('index')}}>
+<form method="post" action={{url('accounts/index')}}>
     @csrf
     <input type="submit" value="ユーザー一覧へ">
 </form>

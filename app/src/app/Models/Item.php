@@ -12,7 +12,5 @@ class Item extends Model
 
     protected $guarded = [
         'id',
-        'type_id',
-        'profile_text'
     ];
 }

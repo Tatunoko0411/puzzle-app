@@ -23,12 +23,14 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $scheduled_date = $this->faker->dateTimeBetween('+1day', '1year');
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'name' => $this->faker->unique()->name(),
+            'level' => $this->faker->numberBetween(1, 100),
+            'EXP' => $this->faker->randomNumber(5),
+            //'life' => $this->faker->randomNumber(1),
+            'created_at' => $scheduled_date->format('Y-m-d H:i:s'),
+            'updated_at' => $scheduled_date->modify('+1hour')->format('Y-m-d H:i:s')
         ];
     }
 
@@ -37,7 +39,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
     }
