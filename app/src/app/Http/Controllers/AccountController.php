@@ -42,7 +42,8 @@ class AccountController extends Controller
     public function index(Request $request)
     {
         //テーブルのすべてのレコードを取得
-        $users = User::simplePaginate(10);
+        // $users = User::simplePaginate(10);
+        $users = User::All();
         $accounts = Account::All();
         $title = 'アカウント一覧';
         $count = Account::count();//レコード数
@@ -62,6 +63,7 @@ class AccountController extends Controller
     public function userDate(Request $request)
     {
         $user = User::where('id', '=', $request->id)->get();
+
         //dd($user);
 
         $userItems = DB::table('user_items')
@@ -73,5 +75,6 @@ class AccountController extends Controller
 
         return view('accounts/user_date', ['user' => $user, 'items' => $userItems]);
     }
+
 
 }

@@ -16,17 +16,19 @@
         <th scope="col">個数</th>
     </tr>
     </thead>
-    @foreach($userItems as $userItem)
-        <thead>
-        <tr>
+    @foreach($users as $user)
+        @foreach($user->items as $item)
+            <thead>
+            <tr>
 
-            <td>{{$userItem->id}}</td>
-            <td>{{$userItem->user_name}}</td>
-            <td>{{$userItem->item_name}}</td>
-            <td>{{$userItem->amount}}</td>
-        </tr>
-        </thead>
+                <td>{{$user->id}}</td>
+                <td>{{$user->name}}</td>
+                <td>{{$item->name}}</td>
+                <td>{{$item->pivot->amount}}</td>
+            </tr>
+            </thead>
 
+        @endforeach
     @endforeach
 </table>
 

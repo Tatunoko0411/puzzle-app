@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use App\Models\Item;
 use App\Models\user_items;
+use App\Models\User;
 use Database\Seeders\UserItemsSeeder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -39,6 +40,7 @@ class AuthController extends Controller
 
     public function userItems(Request $request)
     {
+        $users = User::All();
         $userItems = DB::table('user_items')
             ->join('users', 'users.id', '=', 'user_items.user_id')
             ->join('items', 'items.id', '=', 'user_items.item_id')
@@ -54,7 +56,7 @@ class AuthController extends Controller
         }
 
         //  dd($userItems);
-        return view('auth/user_items', ['userItems' => $userItems]);
+        return view('auth/user_items', ['userItems' => $userItems, 'users' => $users]);
     }
 
     public function login(Request $request)

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\StageController;
 
 Route::prefix('accounts')->name('accounts.')->controller(AccountController::class)
     ->middleware(AuthMiddleware::class)->group(function () {
@@ -16,15 +17,6 @@ Route::prefix('accounts')->name('accounts.')->controller(AccountController::clas
 
     });
 
-Route::prefix('accounts')->name('accounts.')->controller(AuthController::class)
-    ->middleware(AuthMiddleware::class)->group(function () {
-        Route::get('index{name?}', 'index')->name('index');
-        Route::get('scores', 'scores')->name('scores');
-        Route::post('index{name?}', 'index')->name('index');
-        Route::post('scores', 'scores')->name('result');
-        Route::get('userDate{id?}', 'userDate')->name('userDate');
-
-    });
 
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::post('logout', [AuthController::class, 'logout']);
@@ -46,5 +38,16 @@ Route::prefix('items')->name('items.')->controller(ItemController::class)
         Route::post('store', 'store')->name('store');
         Route::post('create', 'index')->name('create');
     });
+
+Route::prefix('stages')->name('stages.')->controller(StageController::class)
+    ->middleware(AuthMiddleware::class)->group(function () {
+        Route::get('index', 'index')->name('index');
+        Route::get('config{id?}', 'config')->name('config');
+        Route::post('update{id?}', 'update')->name('update');
+        Route::post('change{id?}', 'change')->name('change');
+        Route::post('add{id?}', 'add')->name('add');
+        Route::post('create{id?}', 'create')->name('create');
+    });
+
 
 Route::get('/{error_id?}', [AuthController::class, 'index']);

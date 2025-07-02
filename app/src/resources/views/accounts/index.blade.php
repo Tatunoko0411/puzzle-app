@@ -6,7 +6,7 @@
         <input type="text" name="name" placeholder="名前を入力">
         <input type="submit" value="検索">
     </form>
-    {{$users->links()}}
+
     <table>
         <thead>
         <tr>
@@ -18,15 +18,17 @@
         </tr>
         </thead>
         @foreach($users as $user)
-            <thead>
-            <tr>
+            @isset($user->detail->exp)
+                <thead>
+                <tr>
 
-                <td><a href={{url('accounts/userDate')}}?id={{$user->id}}>{{$user->id}}</td>
-                <td>{{$user['name']}}</td>
-                <td>{{$user['level']}}</td>
-                <td>{{$user['EXP']}}</td>
-            </tr>
-            </thead>
+                    <td><a href={{url('accounts/userDate')}}?id={{$user->id}}>{{$user->id}}</td>
+                    <td>{{$user['name']}}</td>
+                    <td>{{$user->detail->exp}}</td>
+                    <td>{{$user->detail->level}}</td>
+                </tr>
+                </thead>
+            @endisset
 
         @endforeach
     </table>
