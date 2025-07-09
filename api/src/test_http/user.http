@@ -7,3 +7,58 @@ GET  http://localhost:8000/
     api/users/index
 Accept:  application/json
 
+### ユーザー登録
+POST http://localhost:8000/api/users/store
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "tatuno",
+    "level": 100,
+    "EXP": 99999999
+}
+
+### ユーザー更新
+POST http://localhost:8000/api/users/update
+Content-Type: application/json
+Accept: application/json
+
+{
+    "user_id": 111,
+    "name": "tatunoko",
+    "level": 101,
+    "EXP": 100000000
+}
+
+### ユーザー情報更新
+POST http://localhost:8000/api/userDetails/update
+Content-Type: application/json
+Accept: application/json
+
+{
+    "user_id": 1,
+    "level": 101,
+    "EXP": 100000000
+}
+
+### アイテム取得
+POST http://localhost:8000/api/items/get
+Content-Type: application/json
+Accept: application/json
+
+{
+    "user_id": 1,
+    "item_id": 1,
+    "amount": 100
+}
+
+### アイテム使用
+POST http://localhost:8000/api/items/use
+Content-Type: application/json
+Accept: application/json
+
+{
+    "user_id": 1,
+    "item_id": 1,
+    "amount": 100
+}

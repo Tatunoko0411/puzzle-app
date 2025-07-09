@@ -22,7 +22,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string'],
         ]);
-        
+
         return response()->json(UserResource::collection($users));
 
         if ($validator->fails()) {
@@ -32,5 +32,39 @@ class UserController extends Controller
 
     }
 
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string'],
+        ]);
+        
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $user = User::create([
+            'name' => $request->name,
+            'level' => $request->level,
+            'EXP' => $request->EXP
+        ]);
+
+        return response()->json(['user_id' => $user->id]);
+
+    }
+
+    public function update(Request $request)
+    {
+
+
+        $user = User::findOrFail($request->user_id);
+
+        $user->name = $request->name;
+        $user->level = $request->level;
+        $user->EXP = $request->EXP;
+
+        $user->save();
+
+        return response()->json();
+    }
 
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\StageCellController;
 use App\Http\Controllers\StageController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserDetailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,3 +42,23 @@ Route::get('items/index',
 Route::get('items/{item_id}',
     [ItemController::class, 'show'])
     ->name('items.show');
+
+Route::post('users/store',
+    [UserController::class, 'store'])
+    ->name('users.store');
+
+Route::post('users/update',
+    [UserController::class, 'update'])
+    ->name('users.update');
+
+Route::post('userDetails/update',
+    [UserDetailController::class, 'update'])
+    ->name('userDetails.update');
+
+Route::post('items/get',
+    [ItemController::class, 'get'])
+    ->name('items.get');
+
+Route::post('items/use',
+    [ItemController::class, 'use'])
+    ->name('items.use');
