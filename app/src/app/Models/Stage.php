@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Stage extends Model
 {
 
-    public function cells()
+    public function objects()
     {
-        return $this->belongsToMany(ObjectType::class,
-            'stage_cells',
-            'stage_id',
-            'object_id')->withPivot('x', 'y', 'id');
-        //  return $this->hasMany(StageCell::class);
+        return $this->hasMany(StageObject::class);
+    }
+
+    public function buttons()
+    {
+        return $this->hasMany(StageButton::class);
     }
 }

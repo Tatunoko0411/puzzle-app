@@ -61,18 +61,24 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        $request->session()->put('login', true);
         $account = Account::where('name', "=", "{$request['name']}")->first();#first()は一件のみget()は配列
 
 
-        if (Hash::check($request->password, $account->password)) {
-            $request->session()->put('login', true);
-            return redirect('accounts/index');
-        }
+        /* if (Hash::check($request->password, $account->password)) {
+             $request->session()->put('login', true);
+             return redirect('accounts/index');
+         }*/
 
 
-        return redirect('/');
+        return redirect('main');
 
         // return redirect('/1');
 
+    }
+
+    public function main()
+    {
+        return view('auth/main');
     }
 }

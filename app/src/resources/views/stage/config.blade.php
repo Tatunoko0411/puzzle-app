@@ -3,6 +3,7 @@
 <table>ステージID　{{$stage->id}}</table>
 <table>ステージ名　{{$stage->name}}</table>
 
+<h2>オブジェクト情報</h2>
 <table>
     <tr>
         <td>セルID</td>
@@ -10,23 +11,40 @@
         <td>Y座標</td>
         <td>オブジェクトタイプ</td>
     </tr>
-    @foreach($stage->cells as $cell)
+    @foreach($stage->objects as $object)
         <tr>
-            <td>{{$cell->pivot->id}}</td>
-            <td>{{$cell->pivot->x}}</td>
-            <td>{{$cell->pivot->y}}</td>
-            <td>{{$cell->name}}</td>
+            <td>{{$object->id}}</td>
+            <td>{{$object->x}}</td>
+            <td>{{$object->y}}</td>
+            <td>{{$object->object_id}}</td>
             <td>
-                <form method="post" action={{url('stages/update')}}?id={{$cell->id}}>
-                    @csrf
-                    <input type="submit" value="編集">
+
                 </form>
             </td>
         </tr>
     @endforeach
 </table>
 
-<form method="post" action={{url('stages/add')}}?id={{$stage->id}}>
+<h2>ボタン情報</h2>
+<table>
+    <tr>
+        <td>ID</td>
+        <td>オブジェクトタイプ</td>
+    </tr>
+    @foreach($stage->buttons as $button)
+        <tr>
+            <td>{{$button->id}}</td>
+            <td>{{$button->object_id}}</td>
+            <td>
+
+                </form>
+            </td>
+        </tr>
+    @endforeach
+</table>
+
+
+<form method="get" action={{url('stages/index')}}>
     @csrf
-    <input type="submit" value="追加">
+    <input type="submit" value="戻る">
 </form>

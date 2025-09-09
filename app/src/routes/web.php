@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\StageObjectController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
@@ -7,9 +9,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\StageController;
 
-Route::prefix('accounts')->name('accounts.')->controller(AccountController::class)
+Route::prefix('users')->name('users.')->controller(UserController::class)
     ->middleware(AuthMiddleware::class)->group(function () {
-        Route::get('index{name?}', 'index')->name('index');
+        Route::get('index{id?}', 'index')->name('index');
         Route::get('scores', 'scores')->name('scores');
         Route::post('index{name?}', 'index')->name('index');
         Route::post('scores', 'scores')->name('result');
@@ -20,6 +22,7 @@ Route::prefix('accounts')->name('accounts.')->controller(AccountController::clas
 
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::post('logout', [AuthController::class, 'logout']);
+Route::get('main', [AuthController::class, 'main']);
 Route::post('items', [AuthController::class, 'items']);
 Route::get('items', [AuthController::class, 'items']);
 Route::post('userItems{name?}', [AuthController::class, 'userItems']);
@@ -40,6 +43,16 @@ Route::prefix('items')->name('items.')->controller(ItemController::class)
     });
 
 Route::prefix('stages')->name('stages.')->controller(StageController::class)
+    ->middleware(AuthMiddleware::class)->group(function () {
+        Route::get('index', 'index')->name('index');
+        Route::get('config{id?}', 'config')->name('config');
+        Route::post('update{id?}', 'update')->name('update');
+        Route::post('change{id?}', 'change')->name('change');
+        Route::post('add{id?}', 'add')->name('add');
+        Route::post('create{id?}', 'create')->name('create');
+    });
+
+Route::prefix('objects')->name('objects.')->controller(StageObjectController::class)
     ->middleware(AuthMiddleware::class)->group(function () {
         Route::get('index', 'index')->name('index');
         Route::get('config{id?}', 'config')->name('config');

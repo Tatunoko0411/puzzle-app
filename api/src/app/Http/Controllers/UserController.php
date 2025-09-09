@@ -32,35 +32,44 @@ class UserController extends Controller
 
     }
 
+
+    /**ユーザ情報登録*/
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string'],
         ]);
-        
+
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
 
         $user = User::create([
             'name' => $request->name,
-            'level' => $request->level,
-            'EXP' => $request->EXP
+            'play_time' => 0,
+            'clear_time' => 0,
+            'create_stage' => 0
         ]);
+//APIトークンを発行する
+        $token = $user->createToken($request->name)->plainTextToken;
 
-        return response()->json(['user_id' => $user->id]);
+        //ユーザーIDとAPIトークンを返す
+        return response()->json(['user_id' => $user->id, 'token' => $token]);
 
     }
 
     public function update(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => ['required']
+        ]);
 
 
-        $user = User::findOrFail($request->user_id);
+        $user = User::findOrFail($request->user()->id);
 
-        $user->name = $request->name;
-        $user->level = $request->level;
-        $user->EXP = $request->EXP;
+        $user->fill([
+            'name' => $request->name
+        ]);
 
         $user->save();
 

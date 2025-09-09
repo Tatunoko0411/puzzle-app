@@ -13,21 +13,17 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "name": "tatuno",
-    "level": 100,
-    "EXP": 99999999
+    "name": "test999"
 }
 
 ### ユーザー更新
 POST http://localhost:8000/api/users/update
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer 3|BHiDDXvgwLWnWIcrgbQirEQLYfdp3Geq6DFh8xwe83c0a8b7
 
 {
-    "user_id": 111,
-    "name": "tatunoko",
-    "level": 101,
-    "EXP": 100000000
+    "name": "aaaa"
 }
 
 ### ユーザー情報更新
@@ -62,3 +58,55 @@ Accept: application/json
     "item_id": 1,
     "amount": 100
 }
+
+### ステージ作成
+POST http://localhost:8000/api/stages/store
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "test000"
+}
+
+### ステージオブジェクト登録
+POST http://localhost:8000/api/stages/object/store
+Content-Type: application/json
+Accept: application/json
+
+{
+    "stage_id": 1,
+    "x": -4.2,
+    "y": 5.5,
+    "rot": 0,
+    "object_id": 2
+}
+
+### ステージオブジェクト登録
+GET http://localhost:8000/api/stages/object/get/1
+Accept: application/json
+
+### ステージ情報取得
+GET http://localhost:8000/api/stages/0
+Accept: application/json
+
+### ステージオブジェクト情報取得
+GET http://localhost:8000/api/stages/object/get/
+Accept: application/json
+
+### ステージボタン情報取得
+GET http://localhost:8000/api/stages/button/get/
+Accept: application/json
+
+### テスト
+GET http://localhost:8000/api/tests
+Accept: application/json
+
+
+###てすと　
+GET http://ge202402.japaneast.cloudapp.azure.com/api/users/index
+Accept: application/json
+
+
+###てすと　
+GET http://ge202402.japaneast.cloudapp.azure.com/api/tests
+Accept: application/json

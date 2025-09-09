@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\ItemController;
-use App\Http\Controllers\StageCellController;
+use App\Http\Controllers\StageButtonController;
+use App\Http\Controllers\StageObjectController;
 use App\Http\Controllers\StageController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserDetailController;
+use App\Models\StageButton;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,17 +25,17 @@ Route::get('stages/index',
     ->name('users.index');
 
 
-Route::get('stages/{stage_id}',
+Route::get('stages/{user_id}',
     [StageController::class, 'show'])
     ->name('users.show');
 
 Route::get('stageCells/index',
-    [StageCellController::class, 'index'])
+    [StageObjectController::class, 'index'])
     ->name('users.index');
 
 
 Route::get('stageCells/{stage_id}',
-    [StageCellController::class, 'show'])
+    [StageObjectController::class, 'show'])
     ->name('users.show');
 
 Route::get('items/index',
@@ -49,7 +52,7 @@ Route::post('users/store',
 
 Route::post('users/update',
     [UserController::class, 'update'])
-    ->name('users.update');
+    ->middleware('auth:sanctum')->name('users.update');
 
 Route::post('userDetails/update',
     [UserDetailController::class, 'update'])
@@ -62,3 +65,26 @@ Route::post('items/get',
 Route::post('items/use',
     [ItemController::class, 'use'])
     ->name('items.use');
+
+Route::post('stages/store',
+    [StageController::class, 'store'])
+    ->name('stages.store');
+
+Route::post('stages/object/store',
+    [StageObjectController::class, 'store'])
+    ->name('stages.object.store');
+
+Route::get('stages/object/get/{stage_id}',
+    [StageObjectController::class, 'get'])
+    ->name('stages.object.get');
+
+Route::post('stages/button/store',
+    [StageButtonController::class, 'store'])
+    ->name('stages.button.store');
+
+Route::get('stages/button/get/{stage_id}',
+    [StageButtonController::class, 'get'])
+    ->name('stages.button.get');
+
+
+Route::get('tests', [TestController::class, 'test']);
