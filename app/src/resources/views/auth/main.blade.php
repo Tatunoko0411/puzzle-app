@@ -1,10 +1,3 @@
-<form method="get" action={{url('users/index')}}>
-    @csrf
-    <input type="submit" value="ユーザー一覧へ">
-</form>
-<form method="get" action={{url('stages/index')}}>
-    @csrf
-    <input type="submit" value="ステージ一覧へ">
-</form>
+<a href= {{url('users/index')}}>ユーザー一覧へ</a>
+<a href= {{url('stages/index')}}>ステージ一覧へ</a>
 
-</form>

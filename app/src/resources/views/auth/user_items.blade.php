@@ -32,17 +32,12 @@
     @endforeach
 </table>
 
-<form method="post" action={{url('accounts/index')}}>
-    @csrf
-    <input type="submit" value="ユーザー一覧へ">
-</form>
-<form method="post" action={{url('items')}}>
-    @csrf
-    <input type="submit" value="アイテム一覧へ">
-</form>
-<form method="post" action={{url('logout')}}>
-    @csrf
-    <input type="submit" value="ログアウト">
-</form>
+<a href={{url('accounts/index')}}>ユーザー一覧へ
+</a>
+<a href={{url('items')}}>アイテム一覧へ
+</a>
+<a href={{url('logout')}}>
+    ログアウト
+</a>
 </body>
 </html>

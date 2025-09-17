@@ -26,9 +26,11 @@ services:
     ports:
       - "8000:80"  # ホスト側ポート番号:コンテナ内ポート番号
 
+
   # Webサーバーコンテナ
   php:
     build: ./app  # Dockerfileでビルド
+    image: puzzle-app
     volumes:
       - ./app/src/:/var/www/                          # Laravelディレクトリ
     ports:

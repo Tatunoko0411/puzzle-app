@@ -79,4 +79,13 @@ class StageController extends Controller
         return redirect('stages/index');
     }
 
+    public function delete(Request $request)
+    {
+        // idで検索後にレコードを削除 (delete)
+        $item = Stage::findOrFail($request->id);
+        $item->delete();
+
+        return redirect()->route('stages.index');
+
+    }
 }

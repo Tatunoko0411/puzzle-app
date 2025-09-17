@@ -50,6 +50,7 @@ Route::prefix('stages')->name('stages.')->controller(StageController::class)
         Route::post('change{id?}', 'change')->name('change');
         Route::post('add{id?}', 'add')->name('add');
         Route::post('create{id?}', 'create')->name('create');
+        Route::get('delete{id?}', 'delete')->name('delete');
     });
 
 Route::prefix('objects')->name('objects.')->controller(StageObjectController::class)

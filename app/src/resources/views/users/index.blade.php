@@ -35,10 +35,9 @@
         @endforeach
     </table>
 
-    <form method="get" action={{url('main')}}>
-        @csrf
-        <input type="submit" value="メインメニューへ">
-    </form>
+    <a href={{url('main')}}>
+        メインメニューへ
+    </a>
 
 @endsection
 

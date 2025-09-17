@@ -110,3 +110,12 @@ Accept: application/json
 ###てすと　
 GET http://ge202402.japaneast.cloudapp.azure.com/api/tests
 Accept: application/json
+
+### ユーザー登録
+POST http://ge202402.japaneast.cloudapp.azure.com/api/users/store
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "test999"
+}

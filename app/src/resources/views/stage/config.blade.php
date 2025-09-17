@@ -44,7 +44,6 @@
 </table>
 
 
-<form method="get" action={{url('stages/index')}}>
-    @csrf
-    <input type="submit" value="戻る">
-</form>
+<a href={{url('stages/index')}}>
+    戻る
+</a>
