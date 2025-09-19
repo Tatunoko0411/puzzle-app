@@ -64,14 +64,16 @@ class AuthController extends Controller
         $request->session()->put('login', true);
         $account = Account::where('name', "=", "{$request['name']}")->first();#first()は一件のみget()は配列
 
+        if (empty($account->password)) {
+            return redirect('/1');
+        }
+        if (Hash::check($request->password, $account->password)) {
+            $request->session()->put('login', true);
+            return redirect('main');
+        }
 
-        /* if (Hash::check($request->password, $account->password)) {
-             $request->session()->put('login', true);
-             return redirect('accounts/index');
-         }*/
 
-
-        return redirect('main');
+        return redirect('/1');
 
         // return redirect('/1');
 
