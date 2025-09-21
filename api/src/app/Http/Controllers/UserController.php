@@ -68,7 +68,28 @@ class UserController extends Controller
         $user = User::findOrFail($request->user()->id);
 
         $user->fill([
-            'name' => $request->name
+            'name' => $request->name,
+
+        ]);
+
+        $user->save();
+
+        return response()->json();
+    }
+
+    public function updateCount(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => ['required']
+        ]);
+
+
+        $user = User::findOrFail($request->user()->id);
+
+        $user->fill([
+            'play_time' => $user->play_time + $request->play_time,
+            'clear_time' => $user->clear_time + $request->clear_time,
+            'create_stage' => $user->create_stage + $request->create_stage,
         ]);
 
         $user->save();

@@ -54,6 +54,10 @@ Route::post('users/update',
     [UserController::class, 'update'])
     ->middleware('auth:sanctum')->name('users.update');
 
+Route::post('users/update/count',
+    [UserController::class, 'updateCount'])
+    ->middleware('auth:sanctum')->name('users.update.count');
+
 Route::post('userDetails/update',
     [UserDetailController::class, 'update'])
     ->name('userDetails.update');
